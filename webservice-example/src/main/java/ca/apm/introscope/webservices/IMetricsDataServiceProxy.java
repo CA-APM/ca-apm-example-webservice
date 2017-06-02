@@ -1,8 +1,12 @@
 package ca.apm.introscope.webservices;
 
-public class IMetricsDataServiceProxy implements ca.apm.introscope.webservices.IMetricsDataService {
+import com.ca.wily.introscope.webservices.DTimeslicedResultSetMetricData;
+import com.ca.wily.introscope.webservices.TimesliceGroupedMetricData;
+import com.wily.introscope.server.webservicesapi.metricsdata.DTimeslicedMetricDataPerAgentMetric;
+
+public class IMetricsDataServiceProxy implements IMetricsDataService {
   private String _endpoint = null;
-  private ca.apm.introscope.webservices.IMetricsDataService iMetricsDataService = null;
+  private IMetricsDataService iMetricsDataService = null;
   
   public IMetricsDataServiceProxy() {
     _initIMetricsDataServiceProxy();
@@ -15,7 +19,7 @@ public class IMetricsDataServiceProxy implements ca.apm.introscope.webservices.I
   
   private void _initIMetricsDataServiceProxy() {
     try {
-      iMetricsDataService = (new ca.apm.introscope.webservices.MetricsDataServiceLocator()).getMetricsDataService();
+      iMetricsDataService = (new MetricsDataServiceLocator()).getMetricsDataService();
       if (iMetricsDataService != null) {
         if (_endpoint != null)
           ((javax.xml.rpc.Stub)iMetricsDataService)._setProperty("javax.xml.rpc.service.endpoint.address", _endpoint);
@@ -38,31 +42,31 @@ public class IMetricsDataServiceProxy implements ca.apm.introscope.webservices.I
     
   }
   
-  public ca.apm.introscope.webservices.IMetricsDataService getIMetricsDataService() {
+  public IMetricsDataService getIMetricsDataService() {
     if (iMetricsDataService == null)
       _initIMetricsDataServiceProxy();
     return iMetricsDataService;
   }
   
-  public ca.apm.introscope.webservices.TimeslicedMetricDataPerAgentMetric[] getBulkMetricData(ca.apm.introscope.webservices.AgentMetricName[] allMetrics, java.util.Calendar startTime, java.util.Calendar endTime, int dataFrequency) throws java.rmi.RemoteException, com.wily.introscope.server.webservicesapi.IntroscopeWebServicesException{
+  public DTimeslicedMetricDataPerAgentMetric[] getBulkMetricData(AgentMetricName[] allMetrics, java.util.Calendar startTime, java.util.Calendar endTime, int dataFrequency) throws java.rmi.RemoteException, com.wily.introscope.server.webservicesapi.IntroscopeWebServicesException{
     if (iMetricsDataService == null)
       _initIMetricsDataServiceProxy();
     return iMetricsDataService.getBulkMetricData(allMetrics, startTime, endTime, dataFrequency);
   }
   
-  public ca.apm.introscope.webservices.TimeslicedResultSetMetricData[] getLiveMetricData(java.lang.String agentRegex, java.lang.String metricPrefix) throws java.rmi.RemoteException, com.wily.introscope.server.webservicesapi.IntroscopeWebServicesException{
+  public DTimeslicedResultSetMetricData[] getLiveMetricData(java.lang.String agentRegex, java.lang.String metricPrefix) throws java.rmi.RemoteException, com.wily.introscope.server.webservicesapi.IntroscopeWebServicesException{
     if (iMetricsDataService == null)
       _initIMetricsDataServiceProxy();
     return iMetricsDataService.getLiveMetricData(agentRegex, metricPrefix);
   }
   
-  public ca.apm.introscope.webservices.TimesliceGroupedMetricData[] getTopNMetricData(java.lang.String agentRegex, java.lang.String metricRegex, java.util.Calendar startTime, java.util.Calendar endTime, int dataFrequency, int topNCount, boolean decreasingOrder) throws java.rmi.RemoteException, com.wily.introscope.server.webservicesapi.IntroscopeWebServicesException{
+  public TimesliceGroupedMetricData[] getTopNMetricData(java.lang.String agentRegex, java.lang.String metricRegex, java.util.Calendar startTime, java.util.Calendar endTime, int dataFrequency, int topNCount, boolean decreasingOrder) throws java.rmi.RemoteException, com.wily.introscope.server.webservicesapi.IntroscopeWebServicesException{
     if (iMetricsDataService == null)
       _initIMetricsDataServiceProxy();
     return iMetricsDataService.getTopNMetricData(agentRegex, metricRegex, startTime, endTime, dataFrequency, topNCount, decreasingOrder);
   }
   
-  public ca.apm.introscope.webservices.TimesliceGroupedMetricData[] getMetricData(java.lang.String agentRegex, java.lang.String metricRegex, java.util.Calendar startTime, java.util.Calendar endTime, int dataFrequency) throws java.rmi.RemoteException, com.wily.introscope.server.webservicesapi.IntroscopeWebServicesException{
+  public TimesliceGroupedMetricData[] getMetricData(java.lang.String agentRegex, java.lang.String metricRegex, java.util.Calendar startTime, java.util.Calendar endTime, int dataFrequency) throws java.rmi.RemoteException, com.wily.introscope.server.webservicesapi.IntroscopeWebServicesException{
     if (iMetricsDataService == null)
       _initIMetricsDataServiceProxy();
     return iMetricsDataService.getMetricData(agentRegex, metricRegex, startTime, endTime, dataFrequency);

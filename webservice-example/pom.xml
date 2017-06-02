@@ -3,11 +3,17 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ca.apm.fieldpacks</groupId>
 	<artifactId>webservice-example</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>CA APM Webservice example</name>
 	<description>Shows how to create a web service client for CA APM</description>
 	<dependencies>
+		<dependency>
+			<groupId>com.ca.apm.em</groupId>
+			<artifactId>com.wily.apm.webservices</artifactId>
+			<version>10.5.1.8</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.axis</groupId>
 			<artifactId>axis</artifactId>

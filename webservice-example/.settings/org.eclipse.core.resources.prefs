@@ -1,12 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/main/java/ca/apm/introscope/webservices/AgentMetricName.java=UTF-8
-encoding//src/main/java/ca/apm/introscope/webservices/IMetricsDataService.java=UTF-8
 encoding//src/main/java/ca/apm/introscope/webservices/MetricData.java=UTF-8
 encoding//src/main/java/ca/apm/introscope/webservices/MetricsDataService.java=UTF-8
 encoding//src/main/java/ca/apm/introscope/webservices/MetricsDataServiceLocator.java=UTF-8
 encoding//src/main/java/ca/apm/introscope/webservices/MetricsDataServiceSoapBindingStub.java=UTF-8
-encoding//src/main/java/ca/apm/introscope/webservices/TimesliceGroupedMetricData.java=UTF-8
-encoding//src/main/java/ca/apm/introscope/webservices/TimeslicedMetricDataPerAgentMetric.java=UTF-8
-encoding//src/main/java/ca/apm/introscope/webservices/TimeslicedResultPerMetricData.java=UTF-8
-encoding//src/main/java/ca/apm/introscope/webservices/TimeslicedResultSetMetricData.java=UTF-8
-encoding//src/main/java/com/wily/introscope/server/webservicesapi/IntroscopeWebServicesException.java=UTF-8
+encoding//src/main/java/com/wily/introscope/webservices/alerts/AlertPollingService.java=UTF-8
+encoding//src/main/java/com/wily/introscope/webservices/alerts/AlertPollingServiceLocator.java=UTF-8
+encoding//src/main/java/com/wily/introscope/webservices/alerts/AlertPollingServiceSoapBindingStub.java=UTF-8
+encoding//src/main/java/com/wily/introscope/webservices/alerts/IAlertPollingService.java=UTF-8

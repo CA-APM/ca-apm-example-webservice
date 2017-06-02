@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:com.wily.introscope.server.webservicesapi.alerts" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:com.wily.introscope.server.webservicesapi.alerts" xmlns:intf="urn:com.wily.introscope.server.webservicesapi.alerts" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns1="http://webservicesapi.server.introscope.wily.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="urn:com.wily.introscope.server.webservicesapi.alerts" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://webservicesapi.server.introscope.wily.com"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="DMgmtModuleSnapshot">
+    <sequence>
+     <element name="manModCurrStatus" type="xsd:int"/>
+     <element name="manModDashboardURL" nillable="true" type="xsd:string"/>
+     <element name="manModPrevStatus" type="xsd:int"/>
+     <element name="manModuleName" nillable="true" type="xsd:string"/>
+     <element name="timeOfStatusChange" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <complexType name="DEMConfig">
+    <sequence>
+     <element name="emDashboardURL" nillable="true" type="xsd:string"/>
+     <element name="emHostName" nillable="true" type="xsd:string"/>
+     <element name="emIpAddress" nillable="true" type="xsd:string"/>
+     <element name="emLaunchTime" type="xsd:long"/>
+     <element name="emWebServerPort" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="DMgmtModuleAlertDefnSnapshot">
+    <sequence>
+     <element name="active" type="xsd:boolean"/>
+     <element name="agentIdentifier" nillable="true" type="xsd:string"/>
+     <element name="alertDashboardURL" nillable="true" type="xsd:string"/>
+     <element name="alertDefnCurrStatus" type="xsd:int"/>
+     <element name="alertDefnPrevStatus" type="xsd:int"/>
+     <element name="alertIdentifier" nillable="true" type="xsd:string"/>
+     <element name="criticalThresholdValue" type="xsd:int"/>
+     <element name="manModuleName" nillable="true" type="xsd:string"/>
+     <element name="timeOfStatusChange" type="xsd:long"/>
+     <element name="warningThresholdValue" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfDMgmtModuleAlertDefnSnapshot">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:DMgmtModuleAlertDefnSnapshot[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOfDMgmtModuleSnapshot">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:DMgmtModuleSnapshot[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ManagementModuleBean">
+    <sequence>
+     <element name="manModuleName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfManagementModuleBean">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:ManagementModuleBean[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="DAllAlertsSnapshot">
+    <sequence>
+     <element name="alertCurrStatus" type="xsd:int"/>
+     <element name="alertName" nillable="true" type="xsd:string"/>
+     <element name="alertPrevStatus" type="xsd:int"/>
+     <element name="alertStatusChanged" type="xsd:boolean"/>
+     <element name="manModuleName" nillable="true" type="xsd:string"/>
+     <element name="simpleAlert" type="xsd:boolean"/>
+     <element name="thresholdValue" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfDAllAlertsSnapshot">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:DAllAlertsSnapshot[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="DMgmtModuleAgentSnapshot">
+    <sequence>
+     <element name="agentCurrStatus" type="xsd:int"/>
+     <element name="agentDashboardURL" nillable="true" type="xsd:string"/>
+     <element name="agentIdentifier" nillable="true" type="xsd:string"/>
+     <element name="agentName" nillable="true" type="xsd:string"/>
+     <element name="agentPrevStatus" type="xsd:int"/>
+     <element name="hostName" nillable="true" type="xsd:string"/>
+     <element name="manModuleName" nillable="true" type="xsd:string"/>
+     <element name="processName" nillable="true" type="xsd:string"/>
+     <element name="timeOfStatusChange" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfDMgmtModuleAgentSnapshot">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:DMgmtModuleAgentSnapshot[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://webservicesapi.server.introscope.wily.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="urn:com.wily.introscope.server.webservicesapi.alerts"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="IntroscopeWebServicesException">
+    <sequence/>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getManagementModuleRequest">
+
+      <wsdl:part name="manModuleName" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAgentSnapshotsResponse">
+
+      <wsdl:part name="getAgentSnapshotsReturn" type="impl:ArrayOfDMgmtModuleAgentSnapshot"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAlertSnapshotRequest">
+
+      <wsdl:part name="manModuleName" type="xsd:string"/>
+
+      <wsdl:part name="agentIdentifier" type="xsd:string"/>
+
+      <wsdl:part name="alertDefName" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllIscopeManagmentModulesRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getAgentSnapshotsRequest">
+
+      <wsdl:part name="manModuleName" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAlertSnapshotsResponse">
+
+      <wsdl:part name="getAlertSnapshotsReturn" type="impl:ArrayOfDMgmtModuleAlertDefnSnapshot"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllAlertsSnapshotRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getEMConfigResponse">
+
+      <wsdl:part name="getEMConfigReturn" type="impl:DEMConfig"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllAlertsSnapshotResponse">
+
+      <wsdl:part name="getAllAlertsSnapshotReturn" type="impl:ArrayOfDAllAlertsSnapshot"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllAlertsSnapshotForManagementModuleRequest">
+
+      <wsdl:part name="managementModule" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllIscopeManagmentModulesResponse">
+
+      <wsdl:part name="getAllIscopeManagmentModulesReturn" type="impl:ArrayOfManagementModuleBean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="IntroscopeWebServicesException">
+
+      <wsdl:part name="fault" type="tns1:IntroscopeWebServicesException"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAlertSnapshotResponse">
+
+      <wsdl:part name="getAlertSnapshotReturn" type="impl:DMgmtModuleAlertDefnSnapshot"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getManagedModulesResponse">
+
+      <wsdl:part name="getManagedModulesReturn" type="impl:ArrayOfDMgmtModuleSnapshot"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllAlertsSnapshotForManagementModuleResponse">
+
+      <wsdl:part name="getAllAlertsSnapshotForManagementModuleReturn" type="impl:ArrayOfDAllAlertsSnapshot"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAgentSnapshotRequest">
+
+      <wsdl:part name="manModuleName" type="xsd:string"/>
+
+      <wsdl:part name="agentIdentifier" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAlertSnapshotsRequest">
+
+      <wsdl:part name="manModuleName" type="xsd:string"/>
+
+      <wsdl:part name="agentIdentifier" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAgentSnapshotResponse">
+
+      <wsdl:part name="getAgentSnapshotReturn" type="impl:DMgmtModuleAgentSnapshot"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllFilteredIscopeManagmentModulesRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getManagementModuleResponse">
+
+      <wsdl:part name="getManagementModuleReturn" type="impl:DMgmtModuleSnapshot"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEMConfigRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllFilteredIscopeManagmentModulesResponse">
+
+      <wsdl:part name="getAllFilteredIscopeManagmentModulesReturn" type="impl:ArrayOfManagementModuleBean"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getManagedModulesRequest">
+
+   </wsdl:message>
+
+   <wsdl:portType name="IAlertPollingService">
+
+      <wsdl:operation name="getManagementModule" parameterOrder="manModuleName">
+
+         <wsdl:input message="impl:getManagementModuleRequest" name="getManagementModuleRequest"/>
+
+         <wsdl:output message="impl:getManagementModuleResponse" name="getManagementModuleResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEMConfig">
+
+         <wsdl:input message="impl:getEMConfigRequest" name="getEMConfigRequest"/>
+
+         <wsdl:output message="impl:getEMConfigResponse" name="getEMConfigResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAlertSnapshot" parameterOrder="manModuleName agentIdentifier alertDefName">
+
+         <wsdl:input message="impl:getAlertSnapshotRequest" name="getAlertSnapshotRequest"/>
+
+         <wsdl:output message="impl:getAlertSnapshotResponse" name="getAlertSnapshotResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAlertSnapshots" parameterOrder="manModuleName agentIdentifier">
+
+         <wsdl:input message="impl:getAlertSnapshotsRequest" name="getAlertSnapshotsRequest"/>
+
+         <wsdl:output message="impl:getAlertSnapshotsResponse" name="getAlertSnapshotsResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getManagedModules">
+
+         <wsdl:input message="impl:getManagedModulesRequest" name="getManagedModulesRequest"/>
+
+         <wsdl:output message="impl:getManagedModulesResponse" name="getManagedModulesResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllIscopeManagmentModules">
+
+         <wsdl:input message="impl:getAllIscopeManagmentModulesRequest" name="getAllIscopeManagmentModulesRequest"/>
+
+         <wsdl:output message="impl:getAllIscopeManagmentModulesResponse" name="getAllIscopeManagmentModulesResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllFilteredIscopeManagmentModules">
+
+         <wsdl:input message="impl:getAllFilteredIscopeManagmentModulesRequest" name="getAllFilteredIscopeManagmentModulesRequest"/>
+
+         <wsdl:output message="impl:getAllFilteredIscopeManagmentModulesResponse" name="getAllFilteredIscopeManagmentModulesResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllAlertsSnapshot">
+
+         <wsdl:input message="impl:getAllAlertsSnapshotRequest" name="getAllAlertsSnapshotRequest"/>
+
+         <wsdl:output message="impl:getAllAlertsSnapshotResponse" name="getAllAlertsSnapshotResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllAlertsSnapshotForManagementModule" parameterOrder="managementModule">
+
+         <wsdl:input message="impl:getAllAlertsSnapshotForManagementModuleRequest" name="getAllAlertsSnapshotForManagementModuleRequest"/>
+
+         <wsdl:output message="impl:getAllAlertsSnapshotForManagementModuleResponse" name="getAllAlertsSnapshotForManagementModuleResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAgentSnapshot" parameterOrder="manModuleName agentIdentifier">
+
+         <wsdl:input message="impl:getAgentSnapshotRequest" name="getAgentSnapshotRequest"/>
+
+         <wsdl:output message="impl:getAgentSnapshotResponse" name="getAgentSnapshotResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAgentSnapshots" parameterOrder="manModuleName">
+
+         <wsdl:input message="impl:getAgentSnapshotsRequest" name="getAgentSnapshotsRequest"/>
+
+         <wsdl:output message="impl:getAgentSnapshotsResponse" name="getAgentSnapshotsResponse"/>
+
+         <wsdl:fault message="impl:IntroscopeWebServicesException" name="IntroscopeWebServicesException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="AlertPollingServiceSoapBinding" type="impl:IAlertPollingService">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getManagementModule">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getManagementModuleRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getManagementModuleResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEMConfig">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getEMConfigRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getEMConfigResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAlertSnapshot">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAlertSnapshotRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAlertSnapshotResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAlertSnapshots">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAlertSnapshotsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAlertSnapshotsResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getManagedModules">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getManagedModulesRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getManagedModulesResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllIscopeManagmentModules">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllIscopeManagmentModulesRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllIscopeManagmentModulesResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllFilteredIscopeManagmentModules">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllFilteredIscopeManagmentModulesRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllFilteredIscopeManagmentModulesResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllAlertsSnapshot">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllAlertsSnapshotRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllAlertsSnapshotResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllAlertsSnapshotForManagementModule">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllAlertsSnapshotForManagementModuleRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllAlertsSnapshotForManagementModuleResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAgentSnapshot">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAgentSnapshotRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAgentSnapshotResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAgentSnapshots">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAgentSnapshotsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://alerts.webservicesimpl.server.introscope.wily.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAgentSnapshotsResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="IntroscopeWebServicesException">
+
+            <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="IntroscopeWebServicesException" namespace="urn:com.wily.introscope.server.webservicesapi.alerts" use="encoded"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="AlertPollingService">
+
+      <wsdl:port binding="impl:AlertPollingServiceSoapBinding" name="AlertPollingService">
+
+         <wsdlsoap:address location="http://apm-docker.ca.com:8081/introscope-web-services/services/AlertPollingService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

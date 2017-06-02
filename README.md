@@ -4,10 +4,10 @@
 This example shows how to create a web service client for CA APM.
 
 ## APM version
-Tested with version 10.0. Should work with APM 9.x as well.
+Tested with version 10.0 and 10.5. Should work with APM 9.x as well.
 
 ## Supported third party versions
-Apache Axis 1.4 (coming with Eclipse Luna SR2
+Apache Axis 1.4 (coming with Eclipse Luna SR2)
 
 
 ## License
@@ -15,24 +15,32 @@ Apache Axis 1.4 (coming with Eclipse Luna SR2
 
 
 # Installation Instructions
-How to install the field pack.
+How to install the extension.
 
 ## Prerequisites
-None.
+Maven 3.2.5
 
 ## Dependencies
-Apache Axis 1.4.
+* Apache Axis 1.4.
+* `com.wily.apm.webservices_<version>.jar` which can be found `&lt;EM_HOME&gt;/product/enterprisemanager/plugins`. Best to add the whole directory to the classpath.
 
 ## Installation
 Run `mvn install`
 
 ## Configuration
-Change the URL in `ca/apm/introscope/webservices/ClientTest.java` to point to your EM.
-
+Change the following variables in `ca/apm/introscope/webservices/ClientTest.java` to point to your environment:
+* host: hostname/IP address of your MOM
+* port: webserver port of your MOM (default 8081)
+* protocol: http or https, only tested with http! For https you might need to add the certificate of the MOM to the Java keystore.
+* user: APM username
+* pwd: password
+* agents: list of agents that are evaluated against the alerts defined in the Management Modules. The web service API does not support querying the threshold values without supplying an agent. If the agent does not match an alert for a the Management Module a SOAP fault is generated and thrown in a `RemoteException`.
 
 # Usage Instructions
 Run `mvn test`.
-The sample test class will print the current live metric data for the metric "Enterprise Manager:Overall Capacity (%)".
+The sample test class will run two test cases:
+* it will print the current live metric data for the metric "Enterprise Manager:Overall Capacity (%)"
+* it will print all Management Modules and if an agent matches an alert the following information for that agent/alert combination: Management Module/Alert/Agent: warning threshold, critical threshold, active, status (0 - no data, 1 - OK, 2, - warning/caution, 3 - critical/danger)
 
 ## Next steps
 I created these classes by downloading the WSDL from (http://<em_host>:8081/introscope-web-services/services/MetricsDataService?wsdl) and generating an Axis client with Eclipse. Starting from this example you can
@@ -51,11 +59,11 @@ This document and associated tools are made available from CA Technologies as ex
 
 Although these utilities are unsupported, please let us know if you have any problems or questions by adding a comment to the CA APM Community Site area where the resource is located, so that the Author(s) may attempt to address the issue or question.
 
-Unless explicitly stated otherwise this field pack is only supported on the same platforms as the APM core agent. See [APM Compatibility Guide](http://www.ca.com/us/support/ca-support-online/product-content/status/compatibility-matrix/application-performance-management-compatibility-guide.aspx).
+Unless explicitly stated otherwise this extension is only supported on the same platforms as the APM core agent. See [APM Compatibility Guide](http://www.ca.com/us/support/ca-support-online/product-content/status/compatibility-matrix/application-performance-management-compatibility-guide.aspx).
 
 
 # Change log
-Changes for each version of the field pack.
+Changes for each version of the extension.
 
 Version | Author | Comment
 --------|--------|--------
